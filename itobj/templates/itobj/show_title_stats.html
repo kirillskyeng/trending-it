@@ -1,0 +1,23 @@
+{% load hitcount_tags %}
+
+<h2 class="entry-title">
+    <a href="{{ p.get_absolute_url }}">{{p.title}}</a>
+</h2>
+
+<div class="entry-meta">
+    <ul>
+        <li class="d-flex align-items-center"><i class="icofont-list"></i> <a>{{p.cat}}</a></li>
+        <li class="d-flex align-items-center"><i class="icofont-user"></i> <a>Kirill Netreba</a></li>
+        <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a>
+            <time datetime="{{p.time_update}}">{{p.time_update|date:"M d, Y"}}</time></a></li>
+        <li class="d-flex align-items-center"><a href="{% url 'like_post' p.slug %}">
+        {% if liked %}
+            <i class="icofont-heart" style="color:red"></i>
+        {% else %}
+            <i class="icofont-heart"></i>
+        {% endif %}
+        </a> <a>{{ p.total_likes }}</a></li>
+        <li class="d-flex align-items-center"><i class="icofont-money-bag"></i> <a>{{p.trending}}</a></li>
+        <li class="d-flex align-items-center"><i class="icofont-eye"></i> <a>{% get_hit_count for p %}</a></li>
+    </ul>
+</div>
